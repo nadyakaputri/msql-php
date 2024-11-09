@@ -1,4 +1,9 @@
 <?php
+session_start();
+if(!$_SESSION['login_status']){
+  header("location:login.php");
+}
+
   if(isset($_GET['title'])){
     $title=$_GET['title'];
   }else{
@@ -37,6 +42,11 @@
       <!-- Right navbar links -->
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
+          <a class="btn btn-outline-danger btn-sm" href="logout.php" role="button"> 
+            <i class="fas fa-power-off"></i>Logout
+          </a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link" id="dark-mode-toggle" href="#" role="button" title="Toggle dark mode">
             <i class="fas fa-sun" id="dark-mode-icon"></i>
           </a>
@@ -48,43 +58,16 @@
         </li>
       </ul>
     </nav>
-<!-- Modal Log In / Log Out -->
-<div class="modal fade" id="modalLoginLogout" tabindex="-1" role="dialog" aria-labelledby="modalLoginLogoutLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="modalLoginLogoutLabel">Pilih Tindakan</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        Silakan pilih apakah Anda ingin masuk atau keluar.
-      </div>
-      <div class="modal-footer">
-        <a href="view/login.php" class="btn btn-primary">Log In</a> <!-- Link ke halaman login -->
-        <a href="logout.php" class="btn btn-danger">Log Out</a> <!-- Link untuk log out -->
-      </div>
-    </div>
-  </div>
-</div>
-
-
 <aside class="main-sidebar sidebar-dark-primary elevation-4 bg">
   <div class="sidebar">
     <div class="user-panel mt-3 pb-3 mb-3 d-flex justify-content-between align-items-center">
       <div class="d-flex align-items-center">
         <div class="image">
-          <img src="#" class="img-circle elevation-2" alt="User Image">
+          <img src="dist/img/kilua.jpeg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info ml-1">
-          <a href="#" class="d-block">Nadya</a>
+          <a href="#" class="d-block"><?=$_SESSION['nama'] ?></a>
         </div>
-      </div>
-      <div class="icont">
-        <a href="#" class="sign-out-link" title="Log In / Log Out" data-toggle="modal" data-target="#modalLoginLogout">
-          <i class="fas fa-sign-out-alt"></i>
-        </a>
       </div>
     </div>
         <nav class="mt-2">
